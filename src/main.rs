@@ -1,14 +1,14 @@
-mod bignum;
+#![feature(portable_simd, bigint_helper_methods)]
+
 mod linear;
+mod matrix;
 mod time_it;
 
-fn main() {    
+fn main() {
     let took;
     let n;
 
-    time_it!(took, n, {
-        linear::get_nth_fib(100_000)
-    });
+    time_it!(took, n, matrix::get_nth_fib_rug(12_049_900 * 2));
 
     println!("{took:?} {n}");
 }

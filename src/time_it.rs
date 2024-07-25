@@ -5,6 +5,6 @@ macro_rules! time_it {
         $return = $expression;
         let end = std::time::Instant::now();
 
-        $took = end.duration_since(start); 
-    }    
+        $took = end.duration_since(start);
+    };
 }
