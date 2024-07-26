@@ -1,6 +1,6 @@
 # Wait one second fib
 Challange of how big of a fibonacci number I can compute in one second.
-(Currently 12.05m on an Intel i7-13620H running at 4.9GHz)
+(Currently 67.1m in 900ms on an Intel i7-13620H running at 4.9GHz)
 ### Running
 ```
 cargo run --release

@@ -4,11 +4,29 @@ mod linear;
 mod matrix;
 mod time_it;
 
-fn main() {
+use std::{
+    io::{BufWriter, Write},
+    time::SystemTime,
+};
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let took;
     let n;
 
-    time_it!(took, n, matrix::get_nth_fib_rug(12_049_900 * 2));
+    let limit = 67_100_000;
+    time_it!(took, n, matrix::get_nth_fib_rug(limit));
 
-    println!("{took:?} {n}");
+    let file_name = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
+        Ok(n) => format!("logs/{limit}_{}.txt", n.as_secs()),
+        Err(_) => panic!("SystemTime before UNIX EPOCH!"),
+    };
+
+    eprintln!("Calculating took {took:?}. Writing results to {file_name}");
+
+    let file = std::fs::File::create(file_name)?;
+    let mut bufwriter = BufWriter::new(file);
+
+    bufwriter.write_fmt(format_args!("{:?} {}", took, n))?;
+
+    Ok(())
 }
