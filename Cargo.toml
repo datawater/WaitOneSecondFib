@@ -6,8 +6,8 @@ edition = "2021"
 [dependencies]
 ndarray = { version = "0.15.6", features = ["matrixmultiply-threading"] }
 rayon = "1.10.0"
-rug = { version = "1.25.0", default-features = false, features = ["integer", "std"] }
+rug = { version = "1.25.0", default-features = false, features = ["integer", "std", "float"] }
 
 [profile.release]
 codegen-units = 1
-lto = "fat"
+lto = "thin"

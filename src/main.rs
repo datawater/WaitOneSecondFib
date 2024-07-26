@@ -1,5 +1,7 @@
 #![feature(portable_simd, bigint_helper_methods)]
 
+mod binet;
+mod fast_double;
 mod linear;
 mod matrix;
 mod time_it;
@@ -13,8 +15,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let took;
     let n;
 
-    let limit = 67_100_000;
-    time_it!(took, n, matrix::get_nth_fib_rug(limit));
+    let limit = 120_000_000;
+    time_it!(took, n, fast_double::get_nth_fib_rug(limit));
 
     let file_name = match SystemTime::now().duration_since(SystemTime::UNIX_EPOCH) {
         Ok(n) => format!("logs/{limit}_{}.txt", n.as_secs()),
